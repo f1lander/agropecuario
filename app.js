@@ -36,7 +36,8 @@ app.controller('MainCtrl', function ($scope, $http, _) {
         $scope.results = [];
         var surnames = _surnames.split(',');
         for (var index = 0; index < surnames.length; index++) {
-            var res = _.where($scope.surnames, { Surname: surnames[index].capitalize().trim() });
+            var capi = surnames[index].trim();
+            var res = _.where($scope.surnames, { Surname: capi.capitalize() });
             if (res) {
                 $scope.results.push(res);
             }
