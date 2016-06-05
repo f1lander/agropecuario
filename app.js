@@ -12,6 +12,10 @@ Array.prototype.sum = function (prop, surnamesLenght) {
     return total
 }
 
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 var underscore = angular.module('underscore', []);
 underscore.factory('_', ['$window', function ($window) {
     return $window._; // assumes underscore has already been loaded on the page
@@ -28,12 +32,11 @@ app.controller('MainCtrl', function ($scope, $http, _) {
         });
 
 
-
     $scope.agropecueame = function (_surnames) {
         $scope.results = [];
         var surnames = _surnames.split(',');
         for (var index = 0; index < surnames.length; index++) {
-            var res = _.where($scope.surnames, { Surname: surnames[index] });
+            var res = _.where($scope.surnames, { Surname: surnames[index].capitalize().trim() });
             if (res) {
                 $scope.results.push(res);
             }
